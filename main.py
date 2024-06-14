@@ -2,7 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 import pandas as pd
 
-def scrape_urban_outfitters():
+def scrape_Data():
     base_url = ''
     headers = {
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
@@ -31,7 +31,7 @@ def scrape_urban_outfitters():
         for product in products:
             try:
                 link_tag = product.find('a', class_='c-pwa-link')
-                link = 'https://www.urbanoutfitters.com' + link_tag['href'] if link_tag else 'N/A'
+                link = '' + link_tag['href'] if link_tag else 'N/A'
                 
                 title_tag = product.find('p', class_='o-pwa-product-tile__heading')
                 title = title_tag.text.strip() if title_tag else 'N/A'
@@ -55,8 +55,8 @@ def scrape_urban_outfitters():
         page += 1
 
     df = pd.DataFrame(product_list)
-    df.to_csv('urban_outfitters_catalog_male.csv', index=False)
-    print('Scraping complete. Data saved to urban_outfitters_catalog_male.csv')
+    df.to_csv('file.csv', index=False)
+    print('Scraping complete. Data saved to file.csv')
 
 if __name__ == "__main__":
-    scrape_urban_outfitters()
+    scrape_Data()
